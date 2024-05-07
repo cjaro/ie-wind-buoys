@@ -19,3 +19,7 @@ $ source my-venv/bin/activate
 ```commandline
 pip install -r requirements.txt
 ```
+3. Run the script
+```commandline
+python3 main/py
+```
