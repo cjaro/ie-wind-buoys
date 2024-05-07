@@ -25,11 +25,8 @@ def save_buoy_names():
     url = "https://www.marine.ie/site-area/data-services/real-time-observations/irish-weather-buoy-network-imos"
     res = requests.get(url)
     html = res.content.decode("utf-8")
-
     soup = BeautifulSoup(html, features="html.parser")
-
     table = soup.find("table", attrs={"class": None})
-
     headers = ["Buoy Name", "Latitude", "Longitude"]
 
     with open("data/buoys-lat-long.csv", "w") as f:
