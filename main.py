@@ -32,7 +32,7 @@ def save_buoy_names():
 
     headers = ["Buoy Name", "Latitude", "Longitude"]
 
-    with open("buoys-lat-long.csv", "w") as f:
+    with open("data/buoys-lat-long.csv", "w") as f:
         wr = csv.writer(f)
 
         wr.writerow(headers)
@@ -54,7 +54,7 @@ def get_html_table():
     for td in table.select("tr.DataGridHeader td"):
         headers.append(td.text)
 
-    with open("weather-buoys-data.csv", "w") as f:
+    with open("data/weather-buoys-data.csv", "w") as f:
         wr = csv.writer(f)
         wr.writerow(headers)
         wr.writerows(
@@ -66,7 +66,7 @@ def get_html_table():
 
 
 def find_buoy_name_in_csv(given_latitude, given_longitude):
-    df = pd.read_csv("buoys-lat-long.csv")
+    df = pd.read_csv("data/buoys-lat-long.csv")
     given_latitude = f"{abs(float(given_latitude)):.4f}"
     given_longitude = f"{abs(float(given_longitude)):.4f}"
     df["Latitude"] = df["Latitude"].astype(str)
@@ -108,7 +108,7 @@ def find_closest_buoy(coords):
 
 
 def get_wind_speed(buoy_name):
-    df = pd.read_csv("weather-buoys-data.csv")
+    df = pd.read_csv("data/weather-buoys-data.csv")
     wind_speed = df.loc[df["Site"] == "Wind Speed (kn)", buoy_name].values[0]
     data_date = df.loc[df["Site"] == "Date", buoy_name].values[0]
     print(f"The corresponding Wind Speed for '{buoy_name}' at {data_date} is {wind_speed} knots")
